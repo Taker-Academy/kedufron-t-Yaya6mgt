@@ -6,6 +6,8 @@
     <link rel="icon" href="icon/logo_site.ico" type="image/x-icon">
     <link href="header.css" rel="stylesheet">
     <link href="shop.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>>
+    <script src="script.js"></script>
     <title>ContrePluche</title>
 </head>
 <body>
@@ -17,10 +19,24 @@
         <div class="zone_panier">
             <img id="logo_panier" src="image/logo_panier.png" alt="logo panier" />
             <p>Mon panier</p>
+
+            <ul id="cart-dropdown" hidden>
+                <li id="empty-cart-msg"><a>Votre panier est vide</a></li>
+                <li class="go-to-cart hidden"><a href="/panier/">Voir le panier</a></li>
+            </ul>
         </div>
     </header>
+    <div class="back-image"></div>
     <nav>
-        
+        <h2>Bienvenue dans notre univers douillet de peluches ContrePluche!</h2>
+
+        <div class="text_pre">
+            <p id="long_text">Plongez dans la tendresse et la douceur avec notre collection exquise de peluches d'animaux,
+                conçues pour égayer chaque instant de votre vie. De l'ourson câlin à l'éléphant majestueux, chaque peluche est soigneusement sélectionnée pour vous offrir une compagnie affectueuse.</p>
+            <p>Adoptez la peluche parfaite dès aujourd'hui et laissez la magie opérer !</p>
+        </div>
     </nav>
+    <div id="article_bdd"></div>
+    <script>displayAllArt()</script>
 </body>
 </html>

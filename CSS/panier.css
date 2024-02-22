@@ -1,0 +1,100 @@
+:root {
+    --color-ourson: rgb(201, 152, 15);
+    --color-back-o: rgba(245, 222, 120, 0.4);
+}
+
+#panierContent {
+    position: fixed;
+    z-index: 2;
+    top:0;
+    right: 0;
+    bottom: 0;
+    width: 30%;
+    padding: 5vw;
+    background-color: white;
+    overflow: auto;
+}
+
+#back_black_panier {
+    position: fixed;
+    z-index: 1;
+    top:0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#panierContent .croix_quit {
+    position: absolute;
+    right: 2vw;
+    top: 2vw;
+}
+
+#panierContent .croix_quit i {
+    font-size: 4vw;
+}
+
+#panierContent h2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    font-size: 3vw;
+}
+
+#panierContent #list_panier {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#panierContent #list_panier .divArtPan {
+    position: relative;
+    border: 1px solid black;
+    width: 100%;
+    height: 6vw;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: 2vw;
+    padding: 0.5vw;
+}
+
+#panierContent #list_panier .divArtPan img {
+    float: left;
+    max-width: 40%;
+    max-height: 5vw;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 0.7vw;
+}
+
+#panierContent #list_panier .divArtPan .nbr_item_pan {
+    position: absolute;
+    right: 2vw;
+    bottom: 1.2vw;
+}
+
+#panierContent #list_panier .divArtPan .del_pan_button {
+    position: absolute;
+    right: 1.5vw;
+    top: 1vw;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+#panierContent #list_panier .divArtPan .del_pan_button i {
+    color: var(--color-ourson);
+    font-size: 1.5vw;
+}
+
+#panierContent #list_panier .divArtPan .name_item_pan {
+    margin-left: 2vw;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+}
+
+#panierContent #list_panier .divArtPan .price_item_pan {
+    margin-left: 2vw;
+    padding-top: 0.5vw;
+}

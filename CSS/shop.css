@@ -3,7 +3,7 @@
     left: 0;
     width: 100%;
     height: 40vw;
-    opacity: 0.5;
+    opacity: 0.9;
     z-index: -1;
     background: url("../image/back_peluche.jpg") no-repeat center center fixed;
     background-size:cover;
@@ -21,8 +21,12 @@ nav h2 {
     text-align: center;
     font-weight: 200;
     margin-bottom: 10px;
+    color: white;
 }
 
+.text_pre p {
+    color: white;
+}
 
 @media screen and (min-width: 850px) {
     nav h2 {

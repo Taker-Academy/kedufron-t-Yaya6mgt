@@ -164,3 +164,82 @@ header .zone_title h1 {
         height: 60px;
     }
 }
+
+.div_search {
+    width:  auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 3vw;
+}
+
+.div_search .zone_suggestion {
+    display: flex;
+    background-color: white;
+    position: relative;
+    margin: auto;
+    width: 100%;
+}
+
+.div_search .zone_suggestion ul{
+    z-index: 1;
+    position: absolute;
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.div_search .zone_suggestion ul li {
+    font-size: 20px;
+    background-color: white;
+    border:2px solid var(--color-ourson);
+    border-top: transparent;
+    width: 18vw;
+    padding-left: 1vw;
+    min-width: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    transition-duration: 0.3s;
+}
+
+.div_search .zone_suggestion ul li:hover {
+    background-color: rgba(201, 152, 15, 0.3);
+    transition-duration: 0.3s;
+}
+
+.zone_search {
+    display: flex;
+    background-color: white;
+    position: relative;
+    margin: auto;
+    width: auto;
+    border: 2px solid var(--color-ourson);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 50px;
+}
+
+.zone_search #searchInput {
+    width: 20vw;
+    min-width: 200px;
+    font-size: 25px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border: none;
+    color: black;
+}
+
+.zone_search button{
+    font-size: 25px;
+    border: none;
+    background-color: transparent;
+}
+
+.zone_search button i {
+    color: var(--color-ourson);
+}

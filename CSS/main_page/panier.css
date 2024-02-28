@@ -76,6 +76,36 @@
     color: var(--color-ourson);
 }
 
+#panierContent #list_panier .divArtPan .div_count button:active {
+    transform: scale(1.1);
+    transition-duration: 0.15s;
+}
+
+.zone_panier {
+    position: relative;
+}
+
+.zone_panier .divTot {
+    position: relative;
+}
+
+.divTot .priceTot {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.divTot .buyButton {
+    background-color: var(--color-ourson);
+    border-color: transparent;
+    transition-duration: 0.3s;
+}
+
+.divTot .buyButton:active {
+    transform: scale(0.9);
+    transition-duration: 0.3s;
+}
+
 @media screen and (min-width: 850px) {
     #panierContent {
         top:0;
@@ -103,6 +133,10 @@
         width: 100%;
         margin-bottom: 2vw;
         padding: 0.5vw;
+    }
+
+    #panierContent .div_info {
+        font-size: 1.2vw;
     }
 
     #panierContent #list_panier .divArtPan .zoneImgCart {
@@ -159,6 +193,17 @@
     #panierContent #list_panier .emptyImg {
         padding-top: 4vw;
         width: 100%;
+    }
+
+    .divTot .priceTot {
+        font-size: 1.2vw;
+        padding: 1vw;
+    }
+
+    .divTot .buyButton {
+        font-size: 1.5vw;
+        padding: 1vw;
+        border-radius: 10px;
     }
 }
 
@@ -256,6 +301,17 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    .divTot .priceTot {
+        font-size: 2vw;
+        padding: 2vw;
+    }
+
+    .divTot .buyButton {
+        font-size: 2.5vw;
+        padding: 2vw;
+        border-radius: 20px;
+    }
 }
 
 @media screen and (max-width: 650px) {
@@ -351,6 +407,17 @@
         width: 80%;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .divTot .priceTot {
+        font-size: 4vw;
+        padding: 4vw;
+    }
+
+    .divTot .buyButton {
+        font-size: 5vw;
+        padding: 4vw;
+        border-radius: 30px;
     }
 }
 

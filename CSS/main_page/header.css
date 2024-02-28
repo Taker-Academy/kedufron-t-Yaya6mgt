@@ -1,16 +1,16 @@
 @font-face {
     font-family: font_title;
-    src: url(../font/Bubblegum.ttf);
+    src: url(../../font/Bubblegum.ttf);
 }
 
 @font-face {
     font-family: font_main_reg;
-    src: url(../font/main_font_reg.ttf);
+    src: url(../../font/main_font_reg.ttf);
 }
 
 @font-face {
     font-family: font_main_bold;
-    src: url(../font/main_font_bold.ttf);
+    src: url(../../font/main_font_bold.ttf);
 }
 
 * {

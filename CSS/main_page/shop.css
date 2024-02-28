@@ -5,7 +5,7 @@
     height: 40vw;
     opacity: 0.9;
     z-index: -1;
-    background: url("../image/back_peluche.jpg") no-repeat center center fixed;
+    background: url("../../image/back_peluche.jpg") no-repeat center center fixed;
     background-size:cover;
 }
 

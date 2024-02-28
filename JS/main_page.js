@@ -4,7 +4,6 @@ if (!localStorage.getItem("panier")) {
 }
 
 let panier = JSON.parse(localStorage.getItem("panier"));
-
 var url = "https://api.kedufront.juniortaker.com/";
 var total_price;
 

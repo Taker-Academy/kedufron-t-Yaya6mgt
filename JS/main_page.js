@@ -1,6 +1,3 @@
-var url = "https://api.kedufront.juniortaker.com/";
-var total_price;
-
 if (!localStorage.getItem("panier")) {
     let panier = [];
     localStorage.setItem("panier", JSON.stringify(panier));
@@ -8,6 +5,14 @@ if (!localStorage.getItem("panier")) {
 
 let panier = JSON.parse(localStorage.getItem("panier"));
 
+var url = "https://api.kedufront.juniortaker.com/";
+var total_price;
+
+/**
+ * add to cart.
+ * @constructor
+ * @param {list} item - it's list of article
+ */
 function ajouterAuPanier(item) {
     var produit = {
         id: item._id,
@@ -26,6 +31,95 @@ function ajouterAuPanier(item) {
     mettreAJourPanier();
 }
 
+function mettreAJourPanier() {
+    var listePanier = document.getElementById('list_panier');
+    total_price = 0;
+
+    listePanier.innerHTML = '';
+    panier.forEach(function(produit) {
+        const divArtPan = document.createElement('div');
+        divArtPan.classList.add('divArtPan');
+
+        const zoneImgCart = document.createElement('div');
+        zoneImgCart.classList.add('zoneImgCart');
+
+        const itemImg = document.createElement('img');
+        var id_t = produit.id + '';
+        var url_img = url + "item/picture/" + id_t;
+        itemImg.src = url_img;
+
+        const divInfo = document.createElement('div');
+        divInfo.classList.add('div_info');
+
+        const nameItem = document.createElement('p');
+        nameItem.textContent = produit.name;
+        nameItem.classList.add('name_item_pan');
+
+
+        const priceItem = document.createElement('p');
+        priceItem.textContent = produit.price.toFixed(2) + " €";
+        priceItem.classList.add('price_item_pan');
+
+        const divCount = document.createElement('div');
+        divCount.classList.add('div_count');
+
+        const suppOneButton = document.createElement('button');
+        const iconSupp = document.createElement('i');
+        iconSupp.classList.add('fa-solid', 'fa-minus');
+        suppOneButton.appendChild(iconSupp);
+        suppOneButton.classList.add('add_sup_ele');
+        divCount.appendChild(suppOneButton);
+
+        const nbrItem = document.createElement('p');
+        nbrItem.textContent = "X " + produit.count.toString();
+        nbrItem.classList.add('nbr_item_pan');
+        divCount.appendChild(nbrItem);
+
+        const addOneButton = document.createElement('button');
+        const iconAdd = document.createElement('i');
+        iconAdd.classList.add('fa-solid', 'fa-plus');
+        addOneButton.appendChild(iconAdd);
+        addOneButton.classList.add('add_sup_ele');
+        divCount.appendChild(addOneButton);
+
+        const delCartButton = document.createElement('button');
+        const cartIcon = document.createElement('i');
+        cartIcon.classList.add('fa-regular', 'fa-trash-can');
+        delCartButton.appendChild(cartIcon);
+        delCartButton.classList.add('del_pan_button');
+
+        delCartButton.addEventListener('click', function() {
+            supprimerDuPanier(produit.id);
+        });
+
+        addOneButton.addEventListener('click', function() {
+            produit.count++;
+            localStorage.setItem("panier", JSON.stringify(panier));
+            mettreAJourPanier();
+        });
+
+        suppOneButton.addEventListener('click', function() {
+            if (produit.count > 0) {
+                produit.count--;
+                localStorage.setItem("panier", JSON.stringify(panier));
+                mettreAJourPanier();
+            }
+        });
+        total_price += (produit.price * produit.count);
+
+        divArtPan.appendChild(delCartButton);
+        divArtPan.appendChild(divCount);
+        divInfo.appendChild(nameItem);
+        divInfo.appendChild(priceItem);
+        zoneImgCart.appendChild(itemImg);
+        divArtPan.appendChild(zoneImgCart);
+        divArtPan.appendChild(divInfo);
+        listePanier.appendChild(divArtPan);
+    });
+    displayTotal();
+}
+
+/** function sort cart */
 function triPanier() {
     panier.forEach(function(produit) {
         if (produit.count === 0) {
@@ -34,6 +128,11 @@ function triPanier() {
     });
 }
 
+/**
+ * adelete to cart.
+ * @constructor
+ * @param {int} id - it's id of article
+ */
 function supprimerDuPanier(id) {
     const fil_panier = panier.filter((prod) => prod.id !== id);
 
@@ -42,12 +141,22 @@ function supprimerDuPanier(id) {
     mettreAJourPanier();
 }
 
+/**
+ * the function tests if the item is already in the cart
+ * @constructor
+ * @param {int} id - it's id of article
+ */
 function produitDejaDansPanier(id) {
     return panier.some(function(produit) {
         return produit.id === id;
     });
 }
 
+/**
+ * get index to article in cart
+ * @constructor
+ * @param {int} id - it's id of article
+ */
 function getIndexProduitDansPanier(id) {
     for (var i = 0; i < panier.length; i++) {
         if (panier[i].id === id) {
@@ -57,6 +166,7 @@ function getIndexProduitDansPanier(id) {
     return -1;
 }
 
+/** display total price or cart empty */
 function displayTotal() {
     var listePanier = document.getElementById('list_panier');
 
@@ -71,6 +181,10 @@ function displayTotal() {
         const buyButton = document.createElement('button');
         buyButton.textContent = "Valider mon panier";
         buyButton.classList.add('buyButton');
+
+        buyButton.addEventListener('click', function() {
+            window.location.href = "validate_cart.html";
+        });
 
         divTot.appendChild(priceTot);
         divTot.appendChild(buyButton);
@@ -93,6 +207,7 @@ function displayTotal() {
     }
 }
 
+/** display all article in first page */
 async function displayAllArt() {
     try {
         var url_item = url + "item/";
@@ -156,6 +271,7 @@ async function displayAllArt() {
     }
 }
 
+/** open or close cart and update cart */
 function togglePanier() {
     var panierContent = document.getElementById('panierContent');
     var backBlack = document.getElementById('back_black_panier');
@@ -172,6 +288,11 @@ function togglePanier() {
     }
 }
 
+/**
+ * open Article and display all info
+ * @constructor
+ * @param {int} id - it's id of article
+ */
 async function openArticle(id) {
     var choiceArticle = document.getElementById('choice_article');
     var backGround = document.getElementById('back_black_art');
@@ -272,6 +393,7 @@ async function openArticle(id) {
     backGround.style.display = 'block';
 }
 
+/** close page cart */
 function closePanier() {
     var panierContent = document.getElementById('panierContent');
     var backBlack = document.getElementById('back_black_panier');
@@ -283,6 +405,7 @@ function closePanier() {
     }
 }
 
+/** close page article */
 function closeArticle() {
     var artDisplay = document.getElementById('choice_article');
     var backBlack = document.getElementById('back_black_art');
@@ -294,14 +417,17 @@ function closeArticle() {
     }
 }
 
+/** disable scroll of body */
 function disableScroll() {
     document.body.style.overflow = 'hidden';
 }
 
+/** enable scroll of body */
 function enableScroll() {
     document.body.style.overflow = '';
 }
 
+/** get data to API */
 async function fetchData() {
     const url_item = url + "item/";
     const response = await axios.get(url_item);
@@ -309,6 +435,11 @@ async function fetchData() {
     return items;
 }
 
+/**
+ * search id with name
+ * @constructor
+ * @param {string} name - it's name of article
+ */
 async function searchIdWithName(name) {
     const items = await fetchData();
 
@@ -320,6 +451,7 @@ async function searchIdWithName(name) {
     return -1;
 }
 
+/** open article with search */
 function openWithSearch() {
     var name = document.getElementById('searchInput').value;
     searchIdWithName(name).then(id => {
@@ -330,6 +462,7 @@ function openWithSearch() {
     });
 }
 
+/** compare two strng */
 function str_cmp(str1, str2) {
     return str1.toLowerCase() === str2.toLowerCase();
 }

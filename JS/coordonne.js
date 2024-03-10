@@ -6,7 +6,7 @@ if (!localStorage.getItem("panier")) {
 let panier = JSON.parse(localStorage.getItem("panier"));
 let coor = JSON.parse(localStorage.getItem("coor"));
 var total_price;
-var url = "https://api.kedufront.juniortaker.com/order/";
+var url = "https://api.kedufront.juniortaker.com/";
 
 async function submit_order() {
     if (handling_zone_saisie() === -1) {
@@ -26,11 +26,12 @@ async function submit_order() {
         "cart": cart
     };
     var commande_id;
-    axios.post(url, body)
+    axios.post(url +"order/", body)
         .then(response => {
             commande_id = response.data.command_id;
-            localStorage.removeItem('panier');
+            alert("Votre numéro de commande est: " + commande_id);
             display_id_order(commande_id);
+            localStorage.removeItem('panier');
         })
         .catch(error => {
             console.error(error);
@@ -87,9 +88,76 @@ function display_id_order(idOrder) {
     var coord = document.getElementById('coordonne');
     coord.style.display = 'none';
 
-    var coord = document.getElementById('zone_commande_id');
-    coord.style.display = 'flex';
+    var zone_com = document.getElementById('zone_commande_id');
+    zone_com.style.display = 'flex';
 
     var num = document.getElementById('num_order');
     num.textContent = idOrder;
+
+    panier.forEach(function(produit) {
+        const divArtPan = document.createElement('div');
+        divArtPan.classList.add('div_art');
+
+        const zoneImgCart = document.createElement('div');
+        zoneImgCart.classList.add('zoneImgCart');
+
+        const itemImg = document.createElement('img');
+        var id_t = produit.id + '';
+        var url_img = url + "item/picture/" + produit.id;
+        itemImg.src = url_img;
+        zoneImgCart.appendChild(itemImg);
+
+        const zoneText = document.createElement('div');
+        zoneText.classList.add('zoneText');
+
+        const zoneDelName = document.createElement('div');
+        zoneDelName.classList.add('zone_del_name');
+
+        const nameArt = document.createElement('p');
+        nameArt.textContent = produit.name;
+        nameArt.classList.add('name_art');
+        zoneDelName.appendChild(nameArt);
+        zoneText.appendChild(zoneDelName);
+
+        const zonePriceCount = document.createElement('div');
+        zonePriceCount.classList.add('zone_p_c');
+        zoneText.appendChild(zonePriceCount);
+
+        const priceArt = document.createElement('p');
+        priceArt.textContent = totalPriceForOneArt(produit.id) + " ";
+        priceArt.classList.add('price_art');
+        zonePriceCount.appendChild(priceArt);
+
+        const euro = document.createElement('span');
+        const iconEuro = document.createElement('i');
+        iconEuro.classList.add('fa-solid', 'fa-euro-sign');
+        euro.appendChild(iconEuro);
+        priceArt.appendChild(euro);
+
+        const zoneCountUpDown = document.createElement('div');
+        zoneCountUpDown.classList.add('zone_count');
+        zonePriceCount.appendChild(zoneCountUpDown);
+
+        const nbrItem = document.createElement('p');
+        nbrItem.textContent = produit.count.toString();
+        nbrItem.classList.add('nbr_item_pan');
+        zoneCountUpDown.appendChild(nbrItem);
+        divArtPan.appendChild(zoneImgCart);
+        divArtPan.appendChild(zoneText);
+
+        zone_com.appendChild(divArtPan);
+    });
+
+}
+
+function totalPriceForOneArt(id)
+{
+    var count = 0;
+
+    panier.forEach(function(produit) {
+        if (id === produit.id) {
+            count = produit.price * produit.count;
+        }
+    });
+    return count.toFixed(2);
 }

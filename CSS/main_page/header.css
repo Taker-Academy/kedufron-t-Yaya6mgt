@@ -197,7 +197,7 @@ header .zone_title h1 {
     border-top: transparent;
     width: 18vw;
     padding-left: 1vw;
-    min-width: 200px;
+    min-width: 300px;
     padding-top: 20px;
     padding-bottom: 20px;
     margin-right: auto;
@@ -226,7 +226,7 @@ header .zone_title h1 {
 
 .zone_search #searchInput {
     width: 20vw;
-    min-width: 200px;
+    min-width: 300px;
     font-size: 25px;
     margin-top: auto;
     margin-bottom: auto;
@@ -242,4 +242,34 @@ header .zone_title h1 {
 
 .zone_search button i {
     color: var(--color-ourson);
+}
+
+@media screen and (min-width: 850px) {
+
+}
+
+@media screen and (max-width: 650px) {
+    .zone_search {
+        background-color: transparent;
+        padding: 5px;
+        border-radius: 30px;
+    }
+
+    .div_search .zone_suggestion ul li {
+        font-size: 15px;
+        padding-left: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .zone_search #searchInput {
+        width: 20vw;
+        min-width: 200px;
+        font-size: 15px;;
+    }
+
+    .zone_search button{
+        font-size: 15px;
+    }
+
 }
